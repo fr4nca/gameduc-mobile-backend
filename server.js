@@ -2,6 +2,7 @@ const express = require("express");
 process.env.NODE_ENV !== "production" ? require("dotenv").config() : null;
 const cors = require("cors");
 const passport = require("passport");
+const http = require("http");
 
 const userRoutes = require("./routes/api/user");
 const gameRoutes = require("./routes/api/game");
@@ -28,6 +29,10 @@ app.use("/api/tarefa", tarefaRoutes);
 app.use("/", (req, res) => {
   res.status(404).send("Route not found");
 });
+
+setInterval(() => {
+  http.get("https://gameduc-api.herokuapp.com/api");
+}, 600000);
 
 const PORT = process.env.PORT || 5000;
 
