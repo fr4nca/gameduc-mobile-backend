@@ -31,7 +31,7 @@ app.use("/", (req, res) => {
 });
 
 setInterval(() => {
-  http.get("https://gameduc-api.herokuapp.com/api");
+  http.get("http://gameduc-api.herokuapp.com/api");
 }, 600000);
 
 const PORT = process.env.PORT || 5000;

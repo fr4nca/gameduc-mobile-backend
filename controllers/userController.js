@@ -42,46 +42,88 @@ class UserController {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(senha, salt, async (err, hashed) => {
           if (err) throw err;
-          if (papel === "professor") {
-            await db.query(
-              `INSERT INTO tb_user (email, senha, tagId, papel) VALUES(? ,?, ?, ?);
-              INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
-              `,
-              [
-                email,
-                hashed,
-                tagId,
-                papel,
-                matricula,
-                nome,
-                sobrenome,
-                dta_nascimento,
-                graduacao
-              ]
-            );
-            return res
-              .status(200)
-              .json({ message: "Usuário criado com sucesso" });
-          } else if (papel === "aluno") {
-            await db.query(
-              `INSERT INTO tb_user (email, senha, tagId, papel) VALUES(?, ?, ?, ?);
-              INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
-              `,
-              [
-                email,
-                hashed,
-                tagId,
-                papel,
-                matricula,
-                nome,
-                sobrenome,
-                dta_nascimento,
-                curso
-              ]
-            );
-            return res
-              .status(200)
-              .json({ message: "Usuário criado com sucesso" });
+          if (tagId === "") {
+            if (papel === "professor") {
+              await db.query(
+                `INSERT INTO tb_user (email, senha, papel) VALUES(? ,?, ?, ?);
+                INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, LAST_INSERT_ID());
+                `,
+                [
+                  email,
+                  hashed,
+                  papel,
+                  matricula,
+                  nome,
+                  sobrenome,
+                  dta_nascimento,
+                  graduacao
+                ]
+              );
+              return res
+                .status(200)
+                .json({ message: "Usuário criado com sucesso" });
+            } else if (papel === "aluno") {
+              await db.query(
+                `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?, ?);
+                INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, LAST_INSERT_ID());
+                `,
+                [
+                  email,
+                  hashed,
+                  papel,
+                  matricula,
+                  nome,
+                  sobrenome,
+                  dta_nascimento,
+                  curso
+                ]
+              );
+              return res
+                .status(200)
+                .json({ message: "Usuário criado com sucesso" });
+            }
+          } else {
+            if (papel === "professor") {
+              await db.query(
+                `INSERT INTO tb_user (email, senha, tagId, papel) VALUES(? ,?, ?, ?);
+                INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
+                `,
+                [
+                  email,
+                  hashed,
+                  tagId,
+                  papel,
+                  matricula,
+                  nome,
+                  sobrenome,
+                  dta_nascimento,
+                  graduacao
+                ]
+              );
+              return res
+                .status(200)
+                .json({ message: "Usuário criado com sucesso" });
+            } else if (papel === "aluno") {
+              await db.query(
+                `INSERT INTO tb_user (email, senha, tagId, papel) VALUES(?, ?, ?, ?);
+                INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
+                `,
+                [
+                  email,
+                  hashed,
+                  tagId,
+                  papel,
+                  matricula,
+                  nome,
+                  sobrenome,
+                  dta_nascimento,
+                  curso
+                ]
+              );
+              return res
+                .status(200)
+                .json({ message: "Usuário criado com sucesso" });
+            }
           }
         });
       });
