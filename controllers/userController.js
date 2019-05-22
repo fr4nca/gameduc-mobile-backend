@@ -45,8 +45,8 @@ class UserController {
           if (tagId === "") {
             if (papel === "professor") {
               await db.query(
-                `INSERT INTO tb_user (email, senha, papel) VALUES(? ,?, ?, ?);
-                INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, LAST_INSERT_ID());
+                `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
+                INSERT INTO tb_professor (matricula, nome, sobrenome, dta_nascimento, graduacao, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
                 `,
                 [
                   email,
@@ -64,8 +64,8 @@ class UserController {
                 .json({ message: "Usuário criado com sucesso" });
             } else if (papel === "aluno") {
               await db.query(
-                `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?, ?);
-                INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, LAST_INSERT_ID());
+                `INSERT INTO tb_user (email, senha, papel) VALUES(?, ?, ?);
+                INSERT INTO tb_aluno (matricula, nome, sobrenome, dta_nascimento, curso, tb_user_id) VALUES(?, ?, ?, ?, ?, LAST_INSERT_ID());
                 `,
                 [
                   email,
