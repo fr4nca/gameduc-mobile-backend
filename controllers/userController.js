@@ -155,9 +155,7 @@ class UserController {
           email: user.email
         };
 
-        const token = await jwt.sign(payload, keys.jwtsecret, {
-          expiresIn: 3600
-        });
+        const token = await jwt.sign(payload, keys.jwtsecret);
 
         return res.json({ token: "Bearer " + token });
       } else {
@@ -191,9 +189,7 @@ class UserController {
           email: user.email
         };
 
-        const token = await jwt.sign(payload, keys.jwtsecret, {
-          expiresIn: 3600
-        });
+        const token = await jwt.sign(payload, keys.jwtsecret);
 
         return res.json({ token: "Bearer " + token });
       } else {
